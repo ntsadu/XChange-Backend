@@ -77,7 +77,7 @@ public class UserController {
    @CrossOrigin()
    @RequestMapping(value = "/GetUserByID", method = RequestMethod.POST)
    public @ResponseBody ResponseEntity<String> getUserByID(@RequestBody String req) {
-	   System.out.println(req);
+//	   System.out.println(req);
        ObjectMapper mapper = new ObjectMapper();
 	   Map<String, Object> user = new HashMap<String, Object>();
 	   String body;

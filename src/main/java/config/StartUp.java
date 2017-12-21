@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import controllers.APIMethods;
-import dao.UserDAO;
-
 @WebServlet(urlPatterns = "/StartUp", loadOnStartup = 1, asyncSupported = true)
 public class StartUp extends HttpServlet{
 	
@@ -28,8 +25,8 @@ public class StartUp extends HttpServlet{
             System.out.println("Error: Could not load resource: spring.xml");
         }
         
-        System.out.println("WELCOME TO XCHANGE");
-    	APIMethods api = new APIMethods();
-    	System.out.println(api.getAllUsers());
+//        System.out.println("WELCOME TO XCHANGE");
+//    	APIMethods api = new APIMethods();
+//    	System.out.println(api.getAllUsers());
     }
 }

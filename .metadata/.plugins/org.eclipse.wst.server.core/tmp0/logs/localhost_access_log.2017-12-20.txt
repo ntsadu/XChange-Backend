@@ -1,3 +1,11 @@
 127.0.0.1 - - [20/Dec/2017:20:12:10 -0500] "GET / HTTP/1.1" 404 1070
 127.0.0.1 - - [20/Dec/2017:20:14:38 -0500] "GET / HTTP/1.1" 404 1070
 0:0:0:0:0:0:0:1 - - [20/Dec/2017:20:16:06 -0500] "POST /xchange/GetAllUsers HTTP/1.1" 200 119
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:20:50:31 -0500] "POST /xchange/GetAllUsers HTTP/1.1" 200 119
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:20:51:16 -0500] "POST /xchange/GetCompanyByID HTTP/1.1" 200 144
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:20:51:32 -0500] "POST /xchange/GetALLCompanies HTTP/1.1" 404 1047
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:20:51:41 -0500] "POST /xchange/GetAllCompanies HTTP/1.1" 200 845892
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:20:52:06 -0500] "POST /xchange/GetAllCompanies HTTP/1.1" 200 845892
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:20:53:41 -0500] "POST /xchange/GetCompanyByID HTTP/1.1" 200 144
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:20:54:06 -0500] "POST /xchange/GetCompanyByID HTTP/1.1" 200 144
+0:0:0:0:0:0:0:1 - - [20/Dec/2017:20:54:10 -0500] "POST /xchange/GetCompanyByID HTTP/1.1" 200 144

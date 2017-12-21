@@ -36,6 +36,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>model.User</value>
+				<value>model.Company</value>
 <!-- 				<value>com.revature.ers.ERS.model.UserRole</value> -->
 <!-- 				<value>com.revature.ers.ERS.model.ReimbursementStatus</value> -->
 <!-- 				<value>com.revature.ers.ERS.model.ReimbursementType</value> -->
@@ -53,6 +54,10 @@
 	
 	<bean id="UserDAO" class="dao.UserDAO">
 <!-- 			init-method="init" destroy-method="destroy"> -->
+		<property name="sessionFactory" ref="HibernateSessionFactory" />
+	</bean>
+	
+	<bean id="CompanyDAO" class="dao.CompanyDAO">
 		<property name="sessionFactory" ref="HibernateSessionFactory" />
 	</bean>
 	
