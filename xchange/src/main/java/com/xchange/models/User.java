@@ -4,44 +4,50 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Component
 @Entity
 @Table(name="user")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // needed to avoid org.springframework.http.converter.HttpMessageNotWritableException
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name="userID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long userId;
-	
+
 	@Column(name="firstname")
 	private String firstname;
-	
+
 	@Column(name="lastname")
 	private String lastname;
-	
-	@Column(name="email")
+
+	@Column(name="email", nullable=false, unique=true)
 	private String email;
 
-	@Column(name="username")
+	@Column(name="username", nullable=false, unique=true)
 	private String username;
-	
+
 	@Column(name="password")
 	private String password;
-	
+
 
 	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUserId(Long userID) {
+		this.userId = userID;
 	}
 
 	public String getUsername() {
@@ -90,8 +96,4 @@ public class User implements Serializable {
 				+ password + ", firstName=" + firstname + ", lastName=" + lastname + ", email=" + email + "]";
 	}
 	
-	public String toJSON() {
-		return "{userId:" + userId + ", username:" + username + ", password:"
-				+ password + ", firstName:" + firstname + ", lastName:" + lastname + ", email:" + email + "}";
-	}
 }

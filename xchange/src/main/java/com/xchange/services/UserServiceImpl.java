@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
 		return repo.findUserByUsername(user.getUsername());
 	}
 	
+	@Override
 	public List<User> findAllUsers() {
 		return repo.findAll();
 	}
@@ -45,5 +46,5 @@ public class UserServiceImpl implements UserService {
 	public User updateUserById(Long userId, User updatedUser) {
 		return repo.save(updatedUser);
 	}
-		
+	
 }

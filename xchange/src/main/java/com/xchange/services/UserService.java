@@ -6,11 +6,11 @@ import com.xchange.models.User;
 
 public interface UserService {
 	
-	public User addUser(User newUser);
-	public List<User> findAllUsers();
-	public User findUserById(Long id);
-	public User findUserByUsername(String username);
-	public User findUserByEmail(String email);
-	public User updateUserById(Long userId, User updatedUser);
+	User addUser(User newUser);
+	List<User> findAllUsers();
+	User findUserById(Long id);
+	User findUserByUsername(String username);
+	User findUserByEmail(String email);
+	User updateUserById(Long userId, User updatedUser);
 
 }

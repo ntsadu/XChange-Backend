@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 import com.xchange.models.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-
-	public User findUserByUsername(String username);
-	public User findUserByEmail(String email);
+public interface UserRepository  extends JpaRepository<User, Long> {
+	
+	User findUserByUsername(String username);
+	User findUserByEmail(String email);
 	
 	@Modifying
 	@Query("UPDATE User u SET u = :updated WHERE u.userId = :userId")
-	public User updateUserById(@Param("userId") Long userId, @Param("updated") User updatedUser);
+	User updateUserById(@Param("userId") Long userId, @Param("updated") User updatedUser);
 	
 }

@@ -27,13 +27,13 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Company getCompanyByName(String name) {
-		return repo.getCompanyByName(name);
+	public List<Company> getCompaniesByName(String name) {
+		return repo.getCompaniesByName(name);
 	}
 
 	@Override
-	public Company getCompanyBySymbol(String symbol) {
-		return repo.getCompanyBySymbol(symbol);
+	public List<Company> getCompaniesBySymbol(String symbol) {
+		return repo.getCompaniesBySymbol(symbol);
 	}
 
 	@Override
@@ -50,5 +50,5 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<Company> getCompaniesByIndustry(String industry) {
 		return repo.getCompaniesByIndustry(industry);
 	}
-
+	
 }

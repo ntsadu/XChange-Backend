@@ -14,43 +14,66 @@ import com.xchange.services.CompanyService;
 @RestController
 @RequestMapping("/companies")
 public class CompanyController {
-	
+
 	@Autowired
 	CompanyService service;
 	
-	@RequestMapping(value="/GetCompanyByID", method=RequestMethod.POST, consumes="application/json", produces="application/json")
-	public Company getCompanyById(@RequestBody long id) {
-		return service.getCompanyById(id);
+	// [DEV] - Method tested using Postman by WS on 28DEC2017 00:48
+	@RequestMapping(value="/GetCompanyById", method=RequestMethod.POST, consumes="application/json", produces="application/json")
+	public Company getCompanyById(@RequestBody Company company) {
+		System.out.println("[LOG] - In /GetCompanyById");
+		System.out.println(service.getCompanyById(company.getCompanyId()));
+		return service.getCompanyById(company.getCompanyId());
 	}
 	
-	@RequestMapping(value="/GetCompanyBySymbol", method=RequestMethod.POST, consumes="application/json", produces="application/json")
-	public Company getCompanyBySymbol(@RequestBody String symbol) {
-		return service.getCompanyByName(symbol);
+	// [DEV] - Method tested using Postman by WS on 28DEC2017 00:51
+	// [DEV] - Changed return type to List<Company> since some company symbols are used on multiple exchanges
+	@RequestMapping(value="/GetCompaniesBySymbol", method=RequestMethod.POST, consumes="application/json", produces="application/json")
+	public List<Company> getCompaniesBySymbol(@RequestBody Company company) {
+		System.out.println("[LOG] - In /GetCompanyBySymbol");
+		System.out.println(service.getCompaniesBySymbol(company.getSymbol()));
+		return service.getCompaniesBySymbol(company.getSymbol());
 	}
 	
-	@RequestMapping(value="/GetCompanyByName", method=RequestMethod.POST, consumes="application/json", produces="application/json")
-	public Company getCompanyByName(@RequestBody String name) {
-		return service.getCompanyByName(name);
+	// [DEV] - Method tested using Postman by WS on 28DEC2017 00:55
+	// [DEV] - Changed return type to List<Company> since some company names are used on multiple exchanges
+	@RequestMapping(value="/GetCompaniesByName", method=RequestMethod.POST, consumes="application/json", produces="application/json")
+	public List<Company> getCompaniesByName(@RequestBody Company company) {
+		System.out.println("[LOG] - In /GetCompanyByName");
+		System.out.println(service.getCompaniesByName(company.getName()));
+		return service.getCompaniesByName(company.getName());
 	}
 	
-	@RequestMapping(value="/GetAllCompanies", method=RequestMethod.POST, consumes="application/json", produces="application/json")
+	// [DEV] - Method tested using Postman by WS on 27DEC2017 16:45
+	@RequestMapping(value="/GetAllCompanies", method=RequestMethod.GET)
 	public List<Company> getAllCompanies() {
+		System.out.println("[LOG] - In /GetAllCompanies");
+		System.out.println(service.getAllCompanies());
 		return service.getAllCompanies();
 	}
 	
+	// [DEV] - Method tested using Postman by WS on 28DEC2017 01:22
 	@RequestMapping(value="/GetCompaniesByExchange", method=RequestMethod.POST, consumes="application/json", produces="application/json")
-	public List<Company> getCompaniesByExchange(@RequestBody String exchange) {
-		return service.getCompaniesByExchange(exchange);
+	public List<Company> getCompaniesByExchange(@RequestBody Company company) {
+		System.out.println("[LOG] - In /GetCompaniesByExchange");
+		System.out.println(service.getCompaniesByExchange(company.getExchange()));
+		return service.getCompaniesByExchange(company.getExchange());
 	}
 	
+	// [DEV] - Method tested using Postman by WS on 28DEC2017 01:10
 	@RequestMapping(value="/GetCompaniesBySector", method=RequestMethod.POST, consumes="application/json", produces="application/json")
-	public List<Company> getCompaniesBySector(@RequestBody String sector) {
-		return service.getCompaniesBySector(sector);
+	public List<Company> getCompaniesBySector(@RequestBody Company company) {
+		System.out.println("[LOG] - In /GetCompaniesBySector");
+		System.out.println(service.getCompaniesBySector(company.getSector()));
+		return service.getCompaniesBySector(company.getSector());
 	}
 	
+	// [DEV] - Method tested using Postman by WS on 28DEC2017 01:19
 	@RequestMapping(value="/GetCompaniesByIndustry", method=RequestMethod.POST, consumes="application/json", produces="application/json")
-	public List<Company> getCompaniesByIndustry(@RequestBody String industry) {
-		return service.getCompaniesByIndustry(industry);
+	public List<Company> getCompaniesByIndustry(@RequestBody Company company) {
+		System.out.println("[LOG] - In /GetCompaniesByIndustry");
+		System.out.println(service.getCompaniesByIndustry(company.getIndustry()));
+		return service.getCompaniesByIndustry(company.getIndustry());
 	}
 	
 }
