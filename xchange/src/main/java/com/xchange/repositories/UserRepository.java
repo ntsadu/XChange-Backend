@@ -1,5 +1,7 @@
 package com.xchange.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +15,7 @@ public interface UserRepository  extends JpaRepository<User, Long> {
 	
 	User findUserByUsername(String username);
 	User findUserByEmail(String email);
+	public User findUserByUsernameAndPassword(String username, String password);
 	
 	@Modifying
 	@Query("UPDATE User u SET u = :updated WHERE u.userId = :userId")

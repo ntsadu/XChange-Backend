@@ -3,6 +3,7 @@ package com.xchange.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xchange.models.User;
 import com.xchange.services.UserService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -27,9 +29,9 @@ public class UserController {
 	
 	// [DEV] - Method tested using Postman by WS on 28DEC2017 00:15
 	@RequestMapping(value="/UpdateUser", method=RequestMethod.POST, produces="application/json", consumes="application/json")
-	public User updateUser(@RequestBody User updatedUser) {
+	public void updateUser(@RequestBody User updatedUser) {
 		System.out.println("[LOG] - In /UpdateUser");
-		return service.updateUserById(updatedUser.getUserId(), updatedUser);
+		service.updateUserById(updatedUser.getUserId(), updatedUser);
 	}
 	
 	// [DEV] - Method tested using Postman by WS on 27DEC2017 16:30
@@ -49,7 +51,7 @@ public class UserController {
 	}
 	
 	// [DEV] - Method tested using Postman by WS on 28DEC2017 00:30
-	@RequestMapping("/GetUserByUsername")
+	@RequestMapping(value="/GetUserByUsername", method=RequestMethod.POST)
 	public User findUserByUsername(@RequestBody User user) {
 		System.out.println("[LOG] - In /GetUserByUsername");
 		return service.findUserByUsername(user.getUsername());
@@ -61,5 +63,10 @@ public class UserController {
 		System.out.println("[LOG] - In /GetUserByEmail");
 		return service.findUserByEmail(user.getEmail());
 	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+    public User loginUser(@RequestBody User user) {
+		return service.loginUser(user);
+    }
 	
 }
