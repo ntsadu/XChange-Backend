@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xchange.models.User;
 import com.xchange.repositories.UserRepository;
-
+	
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -43,8 +43,15 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User updateUserById(Long userId, User updatedUser) {
-		return repo.save(updatedUser);
+	public void updateUserById(Long userId, User u) {
+		User user = repo.findOne(userId);
+		user.setEmail(u.getEmail());
+		user.setPassword(u.getPassword());
+		repo.save(user);
+	}
+	
+	public User loginUser(User u) {
+		return repo.findUserByUsernameAndPassword(u.getUsername(), u.getPassword());
 	}
 	
 }
