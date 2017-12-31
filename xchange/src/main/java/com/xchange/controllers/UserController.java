@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xchange.models.Company;
+import com.xchange.models.DTO;
 import com.xchange.models.User;
 import com.xchange.services.UserService;
 
@@ -71,40 +72,47 @@ public class UserController {
 		return service.loginUser(user);
     }
 	
+	// [DEV] - Method tested using Postman by WS on 29DEC2017 20:56
 	@RequestMapping(value="/AddUserSubscription", method=RequestMethod.POST)
 	public Set<User> addUserSubscription(@RequestBody User[] users) {
 		System.out.println("[LOG] - In /AddUserSubscription");
 		return service.addUserSubscription(users[0].getUserId(), users[1].getUserId());
 	}
 	
+	// [DEV] - Method tested using Postman by WS on 31DEC2017 15:50
 	@RequestMapping(value="/AddUserFavorite", method=RequestMethod.POST)
-	public Set<Company> addUserFavorite(@RequestBody User user, @RequestBody Company company) {
+	public Set<Company> addUserFavorite(@RequestBody DTO dto) {
 		System.out.println("[LOG] - In /AddUserFavorite");
-		return service.addUserFavorite(user.getUserId(), company.getCompanyId());
+		return service.addUserFavorite(dto.getUserId(), dto.getCompanyId());
 	}
 	
+	// [DEV] - Method tested using Postman by WS on 29DEC2017 21:05
 	@RequestMapping(value="/GetAllUserSubscriptions", method=RequestMethod.POST)
 	public Set<User> getAllUserSubscriptions(@RequestBody User user) {
 		System.out.println("[LOG] - In /GetAllUserSubscription");
 		return service.findAllUserSubscriptions(user.getUserId());
 	}
 	
+	// [DEV] - Method tested using Postman by WS on 31DEC2017 15:55
 	@RequestMapping(value="/GetAllUserFavorites", method=RequestMethod.POST)
 	public Set<Company> getAllUserFavorites(@RequestBody User user) {
 		System.out.println("[LOG] - In /GetAllUserFavorites");
 		return service.findAllUserFavorites(user.getUserId());
 	}
 	
+
+	// [DEV] - Method tested using Postman by WS on 29DEC2017 21:10
 	@RequestMapping(value="/RemoveUserSubscription", method=RequestMethod.POST)
 	public void removeUserSubscription(@RequestBody User[] users) {
 		System.out.println("[LOG] - In /RemoveUserSubscription");
 		service.removeUserSubscription(users[0].getUserId(), users[1].getUserId());
 	}
 	
+	// [DEV] - Method tested using Postman by WS on 31DEC2017 16:01
 	@RequestMapping(value="/RemoveUserFavorite", method=RequestMethod.POST)
-	public void removeUserFavorite(@RequestBody User[] users) {
+	public void removeUserFavorite(@RequestBody DTO dto) {
 		System.out.println("[LOG] - In /RemoveUserFavorite");
-		service.removeUserFavorite(users[0].getUserId(), users[1].getUserId());
+		service.removeUserFavorite(dto.getUserId(), dto.getCompanyId());
 	}
 		
 }

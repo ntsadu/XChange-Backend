@@ -13,7 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -23,6 +23,25 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.xchange.XChange</mainClass>
+					<layout>ZIP</layout>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
@@ -34,7 +53,7 @@
 	</parent>
 
 	<dependencies>
-	
+
 		<!-- Spring Boot - Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -71,6 +90,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-		
+
+
+
 	</dependencies>
 </project>
