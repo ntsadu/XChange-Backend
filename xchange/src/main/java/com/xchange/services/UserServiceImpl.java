@@ -1,12 +1,15 @@
 package com.xchange.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xchange.models.Company;
 import com.xchange.models.User;
+import com.xchange.repositories.CompanyRepository;
 import com.xchange.repositories.UserRepository;
 	
 @Service
@@ -14,44 +17,88 @@ import com.xchange.repositories.UserRepository;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository repo;
+	private UserRepository userRepo;
+	
+	@Autowired
+	private CompanyRepository companyRepo;
 	
 	@Override
 	public User addUser(User user) {
-		repo.save(user);
-		return repo.findUserByUsername(user.getUsername());
+		userRepo.save(user);
+		return userRepo.findUserByUsername(user.getUsername());
 	}
 	
 	@Override
 	public List<User> findAllUsers() {
-		return repo.findAll();
+		return userRepo.findAll();
 	}
 	
 	@Override
 	public User findUserById(Long id) {
-		return repo.getOne(id);
+		return userRepo.getOne(id);
 	}
 	
 	@Override
 	public User findUserByUsername(String username) {
-		return repo.findUserByUsername(username);
+		return userRepo.findUserByUsername(username);
 	}
 	
 	@Override
 	public User findUserByEmail(String email) {
-		return repo.findUserByEmail(email);
+		return userRepo.findUserByEmail(email);
 	}
 	
 	@Override
 	public void updateUserById(Long userId, User u) {
-		User user = repo.findOne(userId);
+		User user = userRepo.findOne(userId);
 		user.setEmail(u.getEmail());
 		user.setPassword(u.getPassword());
-		repo.save(user);
+		userRepo.save(user);
 	}
 	
 	public User loginUser(User u) {
-		return repo.findUserByUsernameAndPassword(u.getUsername(), u.getPassword());
+		return userRepo.findUserByUsernameAndPassword(u.getUsername(), u.getPassword());
 	}
 	
+	@Override
+	public Set<User> addUserSubscription(Long user1_id, Long user2_id) {
+		User followingUser = userRepo.findOne(user1_id);
+		User followedUser = userRepo.findOne(user2_id);
+		followingUser.getUserSubscriptions().add(followedUser);
+		return followingUser.getUserSubscriptions();
+	}
+	
+	@Override
+	public Set<Company> addUserFavorite(Long user_id, Long company_id) {
+		User user = userRepo.findOne(user_id);
+		Company company = companyRepo.findOne(company_id);
+		user.getUserFavorites().add(company);
+		return user.getUserFavorites();
+	}
+	
+	@Override
+	public Set<User> findAllUserSubscriptions(Long user_id) {
+		User user = userRepo.findOne(user_id);
+		return user.getUserSubscriptions();
+	}
+	
+	@Override
+	public Set<Company> findAllUserFavorites(Long user_id) {
+		User user = userRepo.findOne(user_id);
+		return user.getUserFavorites();
+	}
+	
+	@Override
+	public void removeUserSubscription(Long user1_id, Long user2_id) {
+		User followingUser = userRepo.findOne(user1_id);
+		User followedUser = userRepo.findOne(user2_id);
+		followingUser.getUserSubscriptions().remove(followedUser);
+	}
+	
+	@Override
+	public void removeUserFavorite(Long user_id, Long company_id) {
+		User user = userRepo.findOne(user_id);
+		Company company = companyRepo.findOne(company_id);
+		user.getUserFavorites().remove(company);
+	}
 }

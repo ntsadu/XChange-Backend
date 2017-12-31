@@ -1,12 +1,17 @@
 package com.xchange.models;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -15,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Component
 @Entity
-@Table(name="user")
+@Table(name="users")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // needed to avoid org.springframework.http.converter.HttpMessageNotWritableException
 public class User implements Serializable {
 
@@ -40,6 +45,20 @@ public class User implements Serializable {
 
 	@Column(name="password")
 	private String password;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+			name="user_subscriptions",
+			joinColumns=@JoinColumn(name="user1_id"),
+			inverseJoinColumns=@JoinColumn(name="user2_id"))
+	private Set<User> userSubscriptions;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+			name="user_favorites",
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="company_id"))
+	private Set<Company> userFavorites;
 
 
 	public Long getUserId() {
@@ -88,6 +107,22 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Set<User> getUserSubscriptions() {
+		return userSubscriptions;
+	}
+
+	public void setUserSubscriptions(Set<User> userSubscriptions) {
+		this.userSubscriptions = userSubscriptions;
+	}
+
+	public Set<Company> getUserFavorites() {
+		return userFavorites;
+	}
+
+	public void setUserFavorites(Set<Company> userFavorites) {
+		this.userFavorites = userFavorites;
 	}
 
 	@Override

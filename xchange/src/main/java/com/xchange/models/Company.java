@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name="company")
+@Table(name="companies")
 public class Company implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
