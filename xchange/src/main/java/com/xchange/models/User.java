@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Component
@@ -51,6 +52,7 @@ public class User implements Serializable {
 			name="user_subscriptions",
 			joinColumns=@JoinColumn(name="user1_id"),
 			inverseJoinColumns=@JoinColumn(name="user2_id"))
+	@JsonIgnore
 	private Set<User> userSubscriptions;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
@@ -58,6 +60,7 @@ public class User implements Serializable {
 			name="user_favorites",
 			joinColumns=@JoinColumn(name="user_id"),
 			inverseJoinColumns=@JoinColumn(name="company_id"))
+	@JsonIgnore
 	private Set<Company> userFavorites;
 
 
