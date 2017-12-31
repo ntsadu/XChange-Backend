@@ -13,7 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -22,6 +22,39 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.xchange.XChange</mainClass>
+					<layout>ZIP</layout>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>br.com.ingenieux</groupId>
+				<artifactId>beanstalk-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<configuration>
+					<applicationName>spring-boot-aws-elasticbeanstalk-example</applicationName>
+					<s3Bucket>spring-boot-aws-example</s3Bucket>
+					<s3Key>xchange-0.0.1-SNAPSHOT.jar</s3Key>
+					<cnamePrefix>spring-boot-aws-elasticbeanstalk-example-dev</cnamePrefix>
+					<environmentName>dev</environmentName>
+					<environmentRef>dev</environmentRef>
+					<solutionStack>64bit Amazon Linux 2016.09 v2.4.0 running Java 8</solutionStack>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -34,7 +67,7 @@
 	</parent>
 
 	<dependencies>
-	
+
 		<!-- Spring Boot - Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -71,6 +104,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-		
+
+
+
 	</dependencies>
 </project>

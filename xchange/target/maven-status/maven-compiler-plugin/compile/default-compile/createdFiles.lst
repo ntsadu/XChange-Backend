@@ -5,6 +5,7 @@ com\xchange\repositories\CompanyRepository.class
 com\xchange\controllers\TestController.class
 com\xchange\repositories\UserRepository.class
 com\xchange\controllers\UserController.class
+com\xchange\models\DTO.class
 com\xchange\services\CompanyServiceImpl.class
 com\xchange\models\Company.class
 com\xchange\services\UserService.class
