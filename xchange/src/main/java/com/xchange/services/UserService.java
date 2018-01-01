@@ -13,7 +13,7 @@ public interface UserService {
 	User findUserById(Long id);
 	User findUserByUsername(String username);
 	User findUserByEmail(String email);
-	User updateUserById(Long userId, User updatedUser);
+	User updateUserById(Long userId, User u);
 	User loginUser(User u);
 	Set<User> addUserSubscription(Long user1_id, Long user2_id);
 	Set<Company> addUserFavorite(Long user_id, Long company_id);
